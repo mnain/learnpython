@@ -9,6 +9,9 @@ class Foo:
 		print dir(self)
 		self.x = v
 
+	def __str__(self):
+		return("Foo(x="+str(self.x)+")")
+
 	def show(self):
 		return self.x
 
@@ -18,6 +21,9 @@ class Bar(Foo):
 		Foo.__init__(self,v)
 		print dir(self)
 		self.y = v
+
+	def __str__(self):
+		return("Bar(y="+str(self.y)+")")
 
 	def show(self):
 		return str(Foo.show(self)) + " " + str(self.y)
