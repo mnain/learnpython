@@ -4,8 +4,8 @@ import sys
 import urllib2
 import xml.etree.ElementTree 
 
-URL = 'http://www.xmlcharts.com/cache/precious-metals.xml'
-URL = 'http://www.nain.cc'
+URL = 'http://www.xmlcharts.com/'
+#URL = 'http://www.nain.cc'
 
 ht = urllib2.urlopen(URL)
 body = ht.readlines()

@@ -2,7 +2,7 @@
 
 import base64
 
-o = 'this_is_a_strong_key';
+o = 'this_is_a_strong_key_strength_99';
 
 e = base64.b64encode(o)
 
