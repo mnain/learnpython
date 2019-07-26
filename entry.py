@@ -8,6 +8,7 @@ This code demonstrates the use of text entry widget in tkinter
 
 import tkinter as tk
 from tkinter import ttk
+import subprocess
 
 class entryApp:
 
@@ -18,28 +19,28 @@ class entryApp:
         self.entry = ttk.Entry(master, width = 30)  # number of characters along the width
         self.entry.pack()
         
-        self.button = ttk.Button(master, text = "Get Entry")
-        self.button.pack()
+        # self.button = ttk.Button(master, text = "Get URL")
+        # self.button.pack()
         self.tkstrvar = tk.StringVar()  # create tk string variable
         self.tkstrvar.set('Nothing is done yet!')   # set the value of tk string variable
-        self.button.config(command = self.getEntry)
+        # self.button.config(command = self.getEntry)
         
         self.msg = ttk.Label(master, text = self.tkstrvar.get())    # get the value of string variable
         self.msg.pack()
         
-        self.btn1 = ttk.Button(master, text='Delete the entry', command = self.btn1func)
+        self.btn1 = ttk.Button(master, text='Download', command = self.downloadFunc)
         self.btn1.pack()
         
-        self.crypt = tk.StringVar()
-        self.crypt.set('Encrypt')
-        self.btn2 = ttk.Button(master, text = "{} Text in Entry Field".format(self.crypt.get()), command = self.changecrypt)
-        self.btn2.pack()
-        #self.entryText = ttk.Entry(master, width=30)
+        # self.crypt = tk.StringVar()
+        # self.crypt.set('Encrypt')
+        # self.btn2 = ttk.Button(master, text = "{} Text in Entry Field".format(self.crypt.get()), command = self.changecrypt)
+        # self.btn2.pack()
+        self.entryText = ttk.Entry(master, width=30)
         
-        ttk.Button(master, text = 'Disable Entry Field', command = self.btn3func).pack()
-        ttk.Button(master, text = 'Enable Entry Field', command = self.btn4func).pack()
-        ttk.Button(master, text = 'Readonly Entry Field', command = self.btn5func).pack()
-        ttk.Button(master, text = 'Edit Entry Field', command = self.btn6func).pack()
+        # ttk.Button(master, text = 'Disable Entry Field', command = self.btn3func).pack()
+        # ttk.Button(master, text = 'Enable Entry Field', command = self.btn4func).pack()
+        # ttk.Button(master, text = 'Readonly Entry Field', command = self.btn5func).pack()
+        # ttk.Button(master, text = 'Edit Entry Field', command = self.btn6func).pack()
     
     def changecrypt(self):
         if self.crypt.get()=='Encrypt':
@@ -69,7 +70,19 @@ class entryApp:
 
     def btn6func(self):
         self.entry.state(['!readonly'])
-
+        
+    def downloadFunc(self):
+        self.tkstrvar.set(self.entry.get())             # get entry widget content and store it in tk_string variable
+        url = self.entry.get()
+        self.msg.config(text = self.tkstrvar.get())     # set msg as value of string variable
+        ferrName = 'output.err'
+        foutName = 'output.txt'
+        foutFh = open(foutName, 'wt')
+        ferrFh = open(ferrName, 'wt')
+        cmd = 'python ..\\youtube-dl \"'+ self.tkstrvar.get() + '\"'
+        rc = subprocess.Popen(cmd, stdin=None, stdout=foutFh, stderr=ferrFh, shell=True).wait()
+        foutFh.close()
+        ferrFh.close()
 
 def launchEntryApp():
     root = tk.Tk()
@@ -81,4 +94,4 @@ def test():
     launchEntryApp()
             
 if __name__ == '__main__': 
-	test()
+    test()
