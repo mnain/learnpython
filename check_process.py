@@ -19,7 +19,7 @@ _PADDING = ' '
 _HOST = 'host'
 _USER = 'user'
 _CMD = 'cmd'
-_PASSWORDS = { 'ncoadmin' : 'n3tc00l', 'emadmin' : 'Tempr00t!!long', 'oracle' : 'oracle', 'db2inst1' : 'n3tc00l' }
+_PASSWORDS = { 'ncoadmin' : 'xyz', 'emadmin' : 'rootonly', 'oracle' : 'oracle', 'db2inst1' : 'abc' }
 
 def check_one(host, cmd):
 	print "Host",host,"Cmd",cmd
